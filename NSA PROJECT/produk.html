@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MOD - Force Vapers</title>
+  <link rel="stylesheet" href="style.css"/>
+  <script>
+    function searchProducts() {
+      // Get the search input
+      let searchQuery = document.getElementById('search-input').value.toLowerCase();
+      
+      // Get all the product cards
+      let products = document.querySelectorAll('.product-card');
+      
+      // Loop through each product and check if it matches the search query
+      products.forEach(product => {
+        let productName = product.querySelector('h3').textContent.toLowerCase();
+        
+        // Check if product name includes the search query
+        if (productName.includes(searchQuery)) {
+          product.style.display = 'block';  // Show the product card
+        } else {
+          product.style.display = 'none';  // Hide the product card (but keep layout)
+        }
+      });
+    }
+  </script>
+</head>
+<body>
+    <!-- VIDEO SEBAGAI BACKGROUND -->
+  <video autoplay muted loop id="bg-video">
+    <source src="video.mp4" type="video/mp4">
+    Browser Anda tidak mendukung pemutaran video.
+  </video>
+  <header>
+    <div class="logo-area">
+        <img src="logo.png" alt="Logo" class="logo"/>
+        <h1>
+          <span class="red-text">NINE</span> 
+          <span class="white-shadow-text">STAR</span> 
+          <span class="black-text">AUTO</span>
+        </h1>      
+      </div>
+    <div class="search-bar">
+      <input type="text" id="search-input" placeholder="Cari produk..." onkeyup="searchProducts()" />
+      <span>🔍</span>
+    </div>
+    <nav class="nav-buttons">
+        <button class="nav-button beranda" onclick="location.href='index.html'">BERANDA</button>
+          <button class="nav-button produk" onclick="location.href='produk.html'">PRODUCT</button>
+        <button class="nav-button sosmed" onclick="location.href='sosmed.html'">CONTACT</button>
+      </nav> 
+  </header>
+
+  <main class="product-page">
+    <h2>PRODUK KAMI:</h2>
+    <div class="product-grid">
+      <div class="product-card">
+        <div class="product-image">
+          <img src="veloz.jpg" alt="HexOhm MOD">
+        </div>
+        <div class="product-info">
+          <h3>OUTLANDER</h3>
+          <p>Tipe: Mechanical MOD</p>
+          <p>Harga: Rp 1.500.000</p>
+        </div>
+      </div>      
+      <div class="product-card">
+        <div class="product-image">
+          <img src="freed.jpg" alt="HexOhm MOD">
+        </div>
+        <div class="product-info">
+          <h3>FREED</h3>
+          <p>Tipe: Mechanical MOD</p>
+          <p>Harga: Rp 1.500.000</p>
+        </div>
+      </div>  
+      <div class="product-card">
+        <div class="product-image">
+          <img src="outlander.jpg" alt="HexOhm MOD">
+        </div>
+        <div class="product-info">
+          <h3>VELOZ</h3>
+          <p>Tipe: Mechanical MOD</p>
+          <p>Harga: Rp 1.500.000</p>
+        </div>
+      </div>  
+      <div class="product-card">
+        <div class="product-image">
+          <img src="outlander.jpg" alt="HexOhm MOD">
+        </div>
+        <div class="product-info">
+          <h3>VELOZ</h3>
+          <p>Tipe: Mechanical MOD</p>
+          <p>Harga: Rp 1.500.000</p>
+        </div>
+      </div>  
+    </div>
+  </main>
+  <!-- Modal Popup -->
+<div id="productModal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <div class="modal-slider">
+      <button class="prev-btn">⟨</button>
+      <img id="sliderImage" src="" alt="Product Image">
+      <button class="next-btn">⟩</button>
+    </div>    
+    <h2 id="modalTitle">OUTLANDER S78</h2>
+    <hr>
+    <h3>DETAIL MOBIL:</h3>
+    <div class="modal-details" id="modalDetails">
+      <!-- Detail produk akan diisi lewat JS -->
+    </div>    
+  </div>
+</div>
+<script>
+  // Ambil modal dan isinya
+const modal = document.getElementById('productModal');
+const modalImg = document.getElementById('modalImage');
+const modalTitle = document.getElementById('modalTitle');
+const modalDetails = document.getElementById('modalDetails');
+const closeBtn = document.querySelector('.close');
+
+// Data produk
+const productData = {
+  "OUTLANDER": {
+    details: [
+      "Mechanical MOD Premium",
+      "Baterai Dual 18650",
+      "Body Aluminium Alloy",
+      "Warna: Hitam & Silver",
+      "Max Output: 240W",
+      "Chipset Proteksi Safety",
+      "Mode Bypass Only",
+      "Made in USA"
+    ]
+  },
+  "FREED": {
+    details: [
+      "Mechanical MOD Ringan",
+      "Baterai Single 21700",
+      "Body Full Carbon",
+      "Warna: Biru Metalik",
+      "Max Output: 100W",
+      "Mode Variable Watt",
+      "Chip Anti-Overheat",
+      "Made in Japan"
+    ]
+  },
+  "VELOZ": {
+  images: ["veloz.jpg", "freed.jpg", "veloz.jpg", "outlander.jpg", "veloz.jpg"],
+  details: [
+    "Mechanical MOD High Performance",
+    "Baterai Dual 20700",
+    "Body Stainless Steel",
+    "Warna: Gold Edition",
+    "Max Output: 300W",
+    "Triple Mode Setting",
+    "Chipset Smart Detection",
+    "Made in Germany"
+  ]
+}
+  
+};
+
+// Fungsi untuk membuka modal
+let currentImageIndex = 0;
+let currentImages = [];
+
+function openModal(_, title) {
+  modal.style.display = "block";
+  modalTitle.textContent = title;
+
+  const data = productData[title];
+  currentImages = data?.images || [];
+  currentImageIndex = 0;
+
+  showImage(currentImageIndex);
+
+  // Tampilkan detail produk (tetap)
+  modalDetails.innerHTML = '';
+  const details = data?.details || [];
+  const ul1 = document.createElement('ul');
+  const ul2 = document.createElement('ul');
+
+  details.forEach((item, index) => {
+    const li = document.createElement('li');
+    li.textContent = item;
+    if (index < 4) ul1.appendChild(li);
+    else ul2.appendChild(li);
+  });
+
+  modalDetails.appendChild(ul1);
+  modalDetails.appendChild(ul2);
+}
+
+function showImage(index) {
+  const sliderImage = document.getElementById('sliderImage');
+  sliderImage.src = currentImages[index];
+}
+
+document.querySelector('.next-btn').onclick = function() {
+  currentImageIndex = (currentImageIndex + 1) % currentImages.length;
+  showImage(currentImageIndex);
+};
+
+document.querySelector('.prev-btn').onclick = function() {
+  currentImageIndex = (currentImageIndex - 1 + currentImages.length) % currentImages.length;
+  showImage(currentImageIndex);
+};
+// Tambahkan event click ke setiap product-card
+document.querySelectorAll('.product-card').forEach(card => {
+  card.addEventListener('click', function () {
+    const title = this.querySelector('h3').textContent.trim();
+    openModal(null, title);
+  });
+});
+
+// Tombol close modal
+closeBtn.onclick = function () {
+  modal.style.display = "none";
+};
+
+// Klik di luar modal-content untuk menutup
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+};
+  </script>  
+</body>
+</html>

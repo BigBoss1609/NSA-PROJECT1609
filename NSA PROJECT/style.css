@@ -1,0 +1,405 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+  }
+  
+  #bg-video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    min-width: 100%;
+    min-height: 100%;
+    object-fit: cover;
+    z-index: -10;
+    filter: brightness(0.); /* opsional */
+    transform: scale(1.34); /* ini bikin video lebih nge-zoom */
+  }
+  
+  header, main, .modal {
+    position: relative;
+    z-index: 10;
+  }
+
+  body {
+    background-color: #fbb951;
+    color: #000;
+    text-align: center;
+    overflow: hidden;
+  }
+  .red-text {
+    color: red;
+  }
+  
+  .white-shadow-text {
+    color: white;
+    text-shadow: 2px 2px 4px black;
+  }
+  
+  .black-text {
+    color: black;
+  }
+  
+  header {
+    background-color: #b3ff00;
+    padding: 2rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .logo-area {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  
+  .logo {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+  }
+  
+  .logo-area h1 {
+    font-size: 50px;
+    color: #fbb951;
+    text-shadow: 1px 1px 2px #000;
+  }
+  
+  .nav-buttons button {
+    margin-left: 50px;
+    background-color: #7a6d57;
+    border: none;
+    padding: 14px 30px;
+    border-radius: 30px;
+    font-size: 30px; /* sebelumnya 16px */
+    cursor: pointer;
+    font-weight: bold;
+  }
+  
+  
+  main {
+    height: calc(100vh - 100px); /* sisa tinggi layar setelah header */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+  
+  
+  .main-logo {
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    border: 6px solid #0848a5;
+    margin-bottom: 20px;
+  }
+  
+  .welcome-text {
+    font-size: 75px;
+    font-weight: bold;
+  }
+  
+  .brand-name {
+    font-size: 150px;
+    font-weight: bold;
+  }
+  .nav-button {
+    color: rgb(251, 255, 0);       /* Semua font kuning */
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    text-shadow: -3px 1px 15px #000000;
+  }
+  
+  /* Warna latar masing-masing tombol */
+  .nav-button.beranda {
+    background-color: red;
+  }
+  
+  .nav-button.produk {
+    background-color: white;
+  }
+  
+  .nav-button.sosmed {
+    background-color: black;
+  }
+  
+  .search-bar {
+    display: flex;
+    align-items: center;
+    background: #eee;
+    border-radius: 30px;
+    padding: 5px 15px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    width: 1000px;
+    height: 70px;
+    gap: 10px;
+  }
+  
+  .search-bar input {
+    border: none;
+    background: transparent;
+    outline: none;
+    font-size: 30px;
+    width: 100%;
+  }
+  
+  .product-page h2 {
+    font-size: 70px;
+    margin-top: -10%;
+    margin-bottom: 30px;
+    font-weight: bold;
+    color: #fff;
+
+  }
+
+  main.product-page {
+    padding-top: 250px; /* Atur sesuai tinggi header-mu */
+  }
+  
+  .product-grid {
+    display: flex;
+    justify-content: center;
+    gap: 100px;
+    flex-wrap: wrap;
+    padding: 0 2rem;
+    max-height: calc(100vh - 300px); /* sisa tinggi layar, dikurangi header + padding */
+    overflow-y: auto; /* agar bisa scroll kalau kelebihan */
+    padding-bottom: 100px; /* biar bawahnya lega */
+    
+  }
+  
+  .product-card {
+    background-color: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    width: 600px;
+    height: auto; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    transition: transform 0.3s ease-in-out;
+    overflow: hidden;
+  }
+  .product-card:hover {
+    transform: scale(1.05); /* zoom 5% saat hover */
+  }
+  
+  .product-card img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  
+  
+  
+  .product-card h3 {
+    font-size: 24px;
+    margin-bottom: 8px;
+    color: #0848a5;
+  }
+  
+  .product-card p {
+    font-size: 18px;
+    margin: 4px 0;
+    color: #333;
+    font-family: sans-serif;
+    font-weight: bolder;
+  }
+
+  /* Modal Style */
+.modal {
+  display: none; 
+  position: fixed;
+  z-index: 9999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.8);
+}
+
+.modal-content {
+  background-color: white;
+  margin: 5% auto;
+  padding: 30px;
+  border-radius: 10px;
+  width: 80%;
+  max-width: 1000px;
+  text-align: center;
+}
+
+.modal-content img {
+  width: 60%;
+  height: auto;
+  border-radius: 10px;
+}
+
+.modal-content h2 {
+  margin-top: 20px;
+  font-size: 48px;
+}
+
+.modal-content hr {
+  margin: 20px 0;
+}
+
+.modal-content h3 {
+  font-size: 32px;
+  margin-bottom: 20px;
+}
+
+.modal-details {
+  display: flex;
+  justify-content: center;
+  gap: 100px;
+}
+
+.modal-details ul {
+  list-style: none;
+  padding: 0;
+  font-size: 24px;
+  text-align: left;
+}
+
+.close {
+  color: #aaa;
+  font-size: 48px;
+  font-weight: bold;
+  position: absolute;
+  right: 80px;
+  top: 50px;
+  cursor: pointer;
+}
+
+.close:hover {
+  color: black;
+}
+  
+.modal-slider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.modal-slider img {
+  width: 3000px;
+  max-width: 90%;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+}
+
+.modal-slider .prev-btn,
+.modal-slider .next-btn {
+  background-color: rgba(0,0,0,0.6);
+  color: white;
+  border: none;
+  font-size: 24px;
+  padding: 10px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.modal-slider .prev-btn:hover,
+.modal-slider .next-btn:hover {
+  background-color: rgba(0,0,0,0.8);
+}
+
+  /* === Sosmed Page Style === */
+  .sosmed-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .sosmed-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 400px;
+    flex-wrap: wrap;
+    padding: 80px 50px;
+    width: 100%;
+  }
+  
+  .mockup-img {
+    width: 540px;
+    max-width: 100%;
+    margin-left: 5%;
+  }
+
+  .contact-box {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    text-decoration: none;
+  }
+
+.contact-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.contact-section h2 {
+  font-size: 80px;
+  font-weight: bold;
+  margin-bottom: 30px;
+  color: #fff;
+}
+
+.contact-item {
+  background-color: #5e4242;
+  box-shadow: #fff;
+  color: white;
+  padding: 20px 50px;
+  border-radius: 30px;
+  font-size: 28px;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+@media (max-width: 768px) {
+  .sosmed-container {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+
+  .contact-item {
+    font-size: 40px;
+    padding: 30px 300px;
+  }
+
+  .contact-box {
+    text-align: center;
+  }
+
+  .contact-item img.icon {
+    width: 70px;
+    height: 70px;
+    vertical-align: middle;
+    margin-right: 8px;
+  }
+  
+  .contact-item:hover {
+    background-color: #797f88;
+    color: #fff;
+    transition: 1s;
+  }
+  
